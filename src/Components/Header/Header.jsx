@@ -1,0 +1,66 @@
+import React from "react";
+import { SlLocationPin } from "react-icons/sl";
+import { IoSearch } from "react-icons/io5";
+import { IoMdCart } from "react-icons/io";
+import classes from "./Header.module.css";
+function Header() {
+  return (
+    <section className={classes.fixed}>
+      <div className={classes.header__container}>
+        {/* {logo} */}
+        <div className={classes.logo__container}>
+          <a href="/">
+            <img
+              src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
+              alt="amazon logo"
+            />
+          </a>
+          <div className={classes.delivery}>
+            <span>
+              <SlLocationPin />
+            </span>
+            <div>
+              <p>Deliver to</p>
+              <span>Ethiopia</span>
+            </div>
+          </div>
+        </div>
+        {/* search section */}
+        <div className={classes.search}>
+          <select name="" id="">
+            <option value="">All</option>
+          </select>
+          <input type="text" />
+          <IoSearch />
+        </div>
+        {/* order section */}
+        <div className={classes.order__container}>
+          <a href="" className={classes.language}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/800px-Flag_of_the_United_States.png"
+              alt=""
+            />
+            <select name="">
+              <option value="">EN</option>
+            </select>
+          </a>
+          <a href="/auth">
+            <p>Sign In</p>
+            <span>Account & Lists</span>
+          </a>
+          <a href="/orders">
+            <p>Returns</p>
+            <span>& Orders</span>
+          </a>
+          <a href="/cart" className={classes.cart}>
+            <IoMdCart size={30} />
+            <span>0</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+  );
+}
+
+export default Header;
