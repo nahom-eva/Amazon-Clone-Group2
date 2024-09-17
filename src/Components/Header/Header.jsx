@@ -3,6 +3,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { IoSearch } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
 import classes from "./Header.module.css";
+import LowerHeader from "./LowerHeader";
 function Header() {
   return (
     <section className={classes.fixed}>
@@ -58,7 +59,7 @@ function Header() {
           </a>
         </div>
       </div>
-
+      <LowerHeader />
     </section>
   );
 }
