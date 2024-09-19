@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { SlLocationPin } from "react-icons/sl";
 import { IoSearch } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
 import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
+import { DataContext } from "../DataProvider/DataProvider";
 function Header() {
+  const [{basket}, dispatch] =useContext(DataContext)
+  const totalItem = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0)
   return (
     <section className={classes.fixed}>
       <div className={classes.header__container}>
@@ -56,7 +61,7 @@ function Header() {
           </Link>
           <Link to="/cart" className={classes.cart}>
             <IoMdCart size={30} />
-            <span>0</span>
+        <span>{totalItem}</span>
           </Link>
         </div>
       </div>
