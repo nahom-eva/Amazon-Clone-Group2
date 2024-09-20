@@ -61,7 +61,7 @@ function Header() {
           </Link>
           <Link to="/cart" className={classes.cart}>
             <IoMdCart size={30} />
-        <span>{totalItem}</span>
+        <span>{basket?.length}</span>
           </Link>
         </div>
       </div>
