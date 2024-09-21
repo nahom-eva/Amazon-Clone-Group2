@@ -35,7 +35,7 @@ function Results() {
         ) : (
           <div className={classes.products__container}>
             {results?.map((product) => {
-              return <ProductCard key={product.id} flex={false} renderDes={false} product={product} />;
+              return <ProductCard key={product.id} flex={false} renderAdd={true} renderDes={false} product={product} />;
             })}
           </div>
         )}
