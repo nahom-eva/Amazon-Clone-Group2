@@ -1,6 +1,7 @@
 import { Type } from "./action.type";
 export const initialState = {
   basket: [],
+  user: null,
 };
 
 // const [state, dispatch] = useReducer(reducer, initialState)
@@ -14,7 +15,7 @@ export const reducer = (state, action) => {
       );
       if (!existingItem) {
         return {
-          ...state, // retain the curent state of the app.
+          ...state, // retain the current state of the app.
           basket: [...state.basket, { ...action.item, amount: 1 }],
         };
       } else {
@@ -29,14 +30,11 @@ export const reducer = (state, action) => {
         };
       }
 
-      case Type.REMOVE_FROM_BASKET:
-
-      
-
+    case Type.REMOVE_FROM_BASKET:
       const index = state.basket.findIndex((item) => item.id === action.id);
-    
+
       let newBasket = [...state.basket];
-      
+
       if (index >= 0) {
         if (newBasket[index].amount > 1) {
           newBasket[index] = {
@@ -51,7 +49,10 @@ export const reducer = (state, action) => {
         ...state,
         basket: newBasket,
       };
-      
+    case Type.SET_USER:
+      return { 
+        ...state, 
+        user: action.user };
 
     default:
       return state;

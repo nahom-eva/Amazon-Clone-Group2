@@ -27,8 +27,8 @@ function Product() {
         <Loader />
       ) : (
         <div className={classes.products__container}>
-          {products.map((data) => {
-            return <ProductCard renderAdd={true} product={data} />;
+          {products.map((data, i) => {
+            return <ProductCard  key ={i} renderAdd={true} product={data} />;
           })}
         </div>
       )}

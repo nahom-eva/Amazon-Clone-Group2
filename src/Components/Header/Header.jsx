@@ -6,11 +6,14 @@ import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
+import { auth } from "../../Utils/firebase";
+import { Type } from "../../Utils/action.type";
+
 function Header() {
-  const [{basket}, dispatch] =useContext(DataContext)
+  const [{ basket, user }, dispatch] = useContext(DataContext);
   const totalItem = basket?.reduce((prev, current) => {
     return current.amount + prev;
-  }, 0)
+  }, 0);
   return (
     <section className={classes.fixed}>
       <div className={classes.header__container}>
@@ -38,7 +41,7 @@ function Header() {
             <option value="">All</option>
           </select>
           <input type="text" />
-          <IoSearch />
+          <IoSearch size={39} />
         </div>
         {/* order section */}
         <div className={classes.order__container}>
@@ -51,9 +54,24 @@ function Header() {
               <option value="">EN</option>
             </select>
           </Link>
-          <Link to="/auth">
-            <p>Sign In</p>
-            <span>Account & Lists</span>
+          <Link to={!user && "/auth"}>
+            {user ? (
+              <>
+                <small>Hello {user?.email?.split("@")[0]}</small>
+                <div
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  Sign Out
+                </div>
+              </>
+            ) : (
+              <>
+                <p>Sign In</p>
+                <span>Account & Lists</span>
+              </>
+            )}
           </Link>
           <Link to="/orders">
             <p>Returns</p>
@@ -61,7 +79,7 @@ function Header() {
           </Link>
           <Link to="/cart" className={classes.cart}>
             <IoMdCart size={30} />
-        <span>{totalItem}</span>
+            <span>{totalItem}</span>
           </Link>
         </div>
       </div>
