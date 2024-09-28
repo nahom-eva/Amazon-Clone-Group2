@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-
 import classes from "./signIn.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../Utils/firebase";
 import {
   signInWithEmailAndPassword,
@@ -23,6 +22,7 @@ function Auth() {
   const [{ user }, dispatch] = useContext(DataContext);
 
   const navigate = useNavigate();
+  const navStateData = useLocation();
 
   console.log(user);
 
@@ -40,7 +40,7 @@ function Auth() {
           });
           setLoading({ ...loading, signUp: false });
           setError("");
-          navigate("/");
+          navigate(navStateData?.state?.redirect || "/");
         })
         .catch((error) => {
           console.log(error.message);
@@ -58,7 +58,7 @@ function Auth() {
           });
           setLoading({ ...loading, signIn: false });
           setError("");
-          navigate("/");
+          navigate(navStateData?.state?.redirect || "/");
         })
         .catch((error) => {
           // console.log(error.message);
@@ -80,6 +80,18 @@ function Auth() {
       {/* form */}
       <div className={classes.login__container}>
         <h1>Sign In</h1>
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              color: "red",
+              textAlign: "center",
+              padding: "5px",
+              fontWeight: "bold",
+            }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+        )}
         <form action="">
           <div>
             <label htmlFor="">Email</label>
